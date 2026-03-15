@@ -33,7 +33,6 @@ export async function fetchActuals(
 
   const data = await res.json();
 
-  // The stream endpoint returns newline-delimited JSON or array
   const records: ActualDataPoint[] = [];
   const items = Array.isArray(data) ? data : data?.data ?? [];
 
@@ -49,7 +48,6 @@ export async function fetchActuals(
   return records;
 }
 
-// Fetch wind forecasts from WINDFOR endpoint
 export async function fetchForecasts(
   from: string,
   to: string
@@ -73,7 +71,6 @@ export async function fetchForecasts(
     generation: Number(item.generation),
   }));
 
-  // Filter: only 0-48 hr horizon
   return records.filter((r) => {
     const horizonHrs =
       (new Date(r.startTime).getTime() - new Date(r.publishTime).getTime()) /
@@ -82,12 +79,10 @@ export async function fetchForecasts(
   });
 }
 
-// For each target time, find the latest forecast published >= horizonHours before it
 export function applyHorizonFilter(
   forecasts: ForecastDataPoint[],
   horizonHours: number
 ): Map<string, number> {
-  // Group forecasts by startTime
   const byTarget = new Map<string, ForecastDataPoint[]>();
 
   for (const f of forecasts) {
@@ -102,16 +97,14 @@ export function applyHorizonFilter(
     const targetTs = new Date(targetTime).getTime();
     const cutoff = targetTs - horizonHours * 3_600_000;
 
-    // Only forecasts published before the cutoff
     const valid = preds.filter(
-      (f) => new Date(f.publishTime).getTime() <= cutoff
+      (f: any) => new Date(f.publishTime).getTime() <= cutoff
     );
 
     if (valid.length === 0) continue;
 
-    // Pick the latest (most recent publishTime among valid)
     valid.sort(
-      (a, b) =>
+      (a: any, b: any) =>
         new Date(b.publishTime).getTime() - new Date(a.publishTime).getTime()
     );
 
@@ -121,12 +114,10 @@ export function applyHorizonFilter(
   return result;
 }
 
-// Merge actuals + filtered forecasts into chart-ready data
 export function buildChartData(
   actuals: ActualDataPoint[],
   forecastMap: Map<string, number>
 ): ChartDataPoint[] {
-  // Build a set of all unique timestamps
   const allTimes = new Set<string>();
   actuals.forEach((a) => allTimes.add(a.startTime));
   forecastMap.forEach((_, t) => allTimes.add(t));
