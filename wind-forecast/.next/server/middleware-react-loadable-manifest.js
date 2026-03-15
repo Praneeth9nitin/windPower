@@ -1,1 +1,0 @@
-self.__REACT_LOADABLE_MANIFEST="{\"app\\\\page.tsx -> @/components/WindChart\":{\"id\":\"app\\\\page.tsx -> @/components/WindChart\",\"files\":[\"static/chunks/_app-pages-browser_components_WindChart_tsx.js\"]}}"
