@@ -1,0 +1,6 @@
+node_modules
+.next
+.ipynb_checkpoints
+wind-forecast/node_modules
+wind-forecast/.next
+wind-forecast/.ipynb_checkpoints
