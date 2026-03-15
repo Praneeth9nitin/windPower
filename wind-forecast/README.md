@@ -52,7 +52,7 @@ Or connect your GitHub repo to [vercel.com](https://vercel.com) for automatic de
 
 ## Live App
 
-[Link to deployed app]
+https://wind-power-git-main-praneeth9nitins-projects.vercel.app/
 
 ## Data Sources
 
