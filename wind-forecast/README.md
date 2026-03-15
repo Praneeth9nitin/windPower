@@ -60,3 +60,7 @@ Or connect your GitHub repo to [vercel.com](https://vercel.com) for automatic de
 - **Forecasts**: `WINDFOR` endpoint — wind generation forecasts with publish time
 
 The horizon filter logic: for each target time T, only forecasts published before `T - horizonHours` are considered. The latest such forecast is plotted.
+
+## AI Usage
+
+AI tools (Claude) were used to assist in building the design of the application and also doing the stats calculations.
